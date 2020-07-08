@@ -73,14 +73,17 @@ class BrowserHelpers(BaseClass, Locator):
 
     def navigate_to_url(self, url):
         self.driver.get(url)
-        self.wait_for_page_to_load()
 
     def wait_for_page_to_load(self):
         wait_time = 0
         try:
-            while self.driver.execute_script('return document.readyState;') != 'complete' and wait_time < 10:
+            while self.driver.execute_script('return document.readyState;') != 'complete' and wait_time < 60:
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                wait_time += 0.1
-                self.wait_time(0.1)
+                wait_time += 1
+                self.wait_time(1)
         except Exception as err:
             print(f"Exception: {err}.Failed to load page.")
+
+    @staticmethod
+    def wait_time(time_in_seconds):
+        time.sleep(time_in_seconds)

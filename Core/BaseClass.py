@@ -12,12 +12,11 @@ import os
 class BaseClass:
     driver: WebDriver = None
 
-    def __init__(self):
-        super(BaseClass).__init__()
-
     def start_execution(self):
         self.init_driver()
-        pytest.main(["-s", "-q", f"{os.getcwd()}/prototype_framework/src/TestCases.py"])
+        pytest.main(["-s", "-q", f"{os.getcwd()}\\Tests\\Test.py"])
+        pytest.main([f"--rootdir={os.getcwd()}/pytest_configs", "-s", "-q",
+                     f"{os.getcwd()}\\Tests\\Test.py"])
 
     def stop_execution(self):
         if self.driver:
@@ -25,7 +24,7 @@ class BaseClass:
 
     def init_driver(self):
         config = {"Browser": "chrome"}
-        driver_location = Path("D:\\Data\\Personal\\PySelFrame\\executables")
+        driver_location = Path(f"{os.getcwd()}\\executables")
         driver_type = config['Browser'].lower()
 
         driver_extension = None
