@@ -59,7 +59,9 @@ class BrowserHelpers(BaseClass, Locator):
             self.find_element(object_locator).click()
 
     def get_text(self, object_locator):
-        return self.find_element(object_locator).text
+        text = self.find_element(object_locator).text
+        self.log(f"{self.locator_description} has text: '{text}'")
+        return text
 
     def is_element_displayed(self, object_locator):
         time.sleep(5)
@@ -73,7 +75,7 @@ class BrowserHelpers(BaseClass, Locator):
 
     def navigate_to_url(self, url):
         self.driver.get(url)
-        self.log(f"Navigate To {url}")
+        self.log(f"Navigate To '{url}'")
 
     def wait_for_page_to_load(self):
         wait_time = 0

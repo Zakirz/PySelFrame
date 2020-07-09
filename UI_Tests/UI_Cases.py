@@ -1,4 +1,4 @@
-from Tests.Test_Homepage import Test_Homepage
+from UI_Tests.Test_Homepage import Test_Homepage
 
 
 class Cases:

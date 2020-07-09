@@ -9,7 +9,7 @@ class Locator():
     def parse_locator(self, enc_locator):
         try:
             pattern = r"^[a-zA-Z0-9_]*#([a-zA-Z_]+)=([\w\[\]()/@\'\":.+=#^$>*\-_])+$"
-            if re.match(pattern, self.enc_locator):
+            if re.match(pattern, enc_locator):
                 self.locator_description = enc_locator.split("#", 1)[0]
                 self.locator_type, self.locator = enc_locator.split("#", 1)[
                     1].split("=", 1)
