@@ -4,6 +4,7 @@ import click
 import os
 import time
 import pytest
+from Core.Configs import RunConfig
 
 
 def init_env(now_time):
@@ -32,7 +33,9 @@ def run(m):
         pytest.main([f"--rootdir={BASE_DIR}/pytest_configs", "-s", "-v", f"{os.getcwd()}\\Tests",
                      "--html=" + html_report,
                      "--junit-xml=" + xml_report,
-                     "--self-contained-html"])
+                     "--self-contained-html",
+                     "--maxfail", RunConfig.max_fail,
+                     ])
     elif m == "debug":
         print("Debug Mode")
         pytest.main(["-v", "-s", f"{os.getcwd()}\\Tests"])

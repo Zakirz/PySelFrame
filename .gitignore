@@ -1,2 +1,6 @@
 *.pyc
-*.pyc
+/.pytest_cache/
+/__pycache__/
+/test_report/
+/.idea/
+/.vscode/
