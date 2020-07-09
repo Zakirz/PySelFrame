@@ -1,27 +1,17 @@
-import os
-import sys
-import platform
-from collections import OrderedDict
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
+from collections import OrderedDict
+import platform
+from selenium import webdriver
+import sys
+import os
 
 from Core.Logger import Logger
+from Core.BaseClass import BaseClass
 
 
-class BaseClass(Logger):
-    driver: WebDriver = None
-
-    def start_execution(self):
-        self.init_logger()
-        self.open_browser()
-
-    def stop_execution(self):
-        if self.driver:
-            self.driver.quit()
-
+class Browsers(Logger):
     def open_browser(self):
-        driver_type = self.BROWSER_TYPE.lower()
+        driver_type = self.driver_type.lower()
         driver_extension = None
         platform_name = platform.system()
         if platform_name == "Windows":
@@ -40,8 +30,8 @@ class BaseClass(Logger):
                 driver_type = "chrome"
 
             driver = driver[driver_type]["interface"](
-                executable_path=os.path.join(self.DRIVERS_PATH, driver[driver_type]["name"]))
-            BaseClass.driver = driver
+                executable_path=os.path.join(self.driver_location, driver[driver_type]["name"]))
+            driver = BaseClass.driver
             BaseClass.driver.maximize_window()
             return BaseClass.driver
         except (FileNotFoundError, WebDriverException):
