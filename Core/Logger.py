@@ -17,7 +17,7 @@ class Logger(RunConfig):
 
     def init_logger(self):
         __log_level = logging.INFO
-        __formatter = "%(levelname)-8s | %(asctime)s | %(message)s"
+        __formatter = "%(levelname)-8s | %(logid)-4s | %(asctime)s | %(message)s"
         __handlers = [
             logging.StreamHandler(sys.stdout),
             logging.FileHandler(filename=f"{self.LOG_FILE}", mode="w")
@@ -31,40 +31,20 @@ class Logger(RunConfig):
         )
         self.logger.info("Initializing logger...")
 
-    def log_writer(self, *, level: str, message: str):
-        try:
-            self.LOG_ID += 1
-            if level is None:
-                level = "INFO"
-
-            if not level.isupper():
-                level = level.upper()
-
-            write_log = OrderedDict({
-                "DEBUG": self.logger.info,
-                "INFO": self.logger.info,
-                "WARNING": self.logger.warning,
-                "ERROR": self.logger.error,
-                "CRITICAL": self.logger.critical,
-                "EXCEPTION": self.logger.error
-            })
-
-            write_log[level](message)
-        except KeyError:
-            self.logger.warning(f"{level} is not a valid Log Level")
-            self.logger.info(message)
-
-    def log(self, message: str):
+    def info_log(self, message: str):
         wrapper = textwrap.TextWrapper(width=120)
         message = wrapper.fill(message.strip())
-        self.log_writer(level='INFO', message=message)
+        self.LOG_ID += 1
+        self.logger.info(message)
 
-    def error(self, message: str):
+    def warn_log(self, message: str):
         wrapper = textwrap.TextWrapper(width=120)
         message = wrapper.fill(message.strip())
-        self.log_writer(level='ERROR', message=message)
+        self.LOG_ID += 1
+        self.logger.warning(message)
 
-    def fatal(self, message: str):
+    def fail_log(self, message: str):
         wrapper = textwrap.TextWrapper(width=120)
         message = wrapper.fill(message.strip())
-        self.log_writer(level='CRITICAL', message=message)
+        self.LOG_ID += 1
+        self.logger.error(message)
