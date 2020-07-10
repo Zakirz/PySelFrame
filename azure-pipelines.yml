@@ -30,3 +30,8 @@ steps:
     pip install pytest-azurepipelines
     python  run_tests.py -m "ui"
   displayName: 'Start Testing'
+
+- task: PublishTestResults@2
+inputs:
+  testResultsFormat: 'JUnit'
+  testResultsFiles: '**/junit*.xml'
