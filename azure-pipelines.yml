@@ -32,6 +32,8 @@ steps:
   displayName: 'Start Testing'
 
 - task: PublishTestResults@2
-inputs:
-  testResultsFormat: 'JUnit'
-  testResultsFiles: '**/junit*.xml'
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/junit*.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)/Reports'
+    testRunTitle: 'UI Tests'
