@@ -27,7 +27,8 @@ class Logger(RunConfig):
         logging.basicConfig(
             level=__log_level,
             format=__formatter,
-            handlers=__handlers
+            handlers=__handlers,
+            datefmt='%Y-%m-%d %I:%M:%S  %p',
         )
         self.logger.info("Initializing logger...")
 
