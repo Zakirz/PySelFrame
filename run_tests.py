@@ -1,4 +1,3 @@
-# from Core.BrowserHelpers import BrowserHelpers
 import click
 import os
 import pytest

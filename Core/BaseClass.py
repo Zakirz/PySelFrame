@@ -14,7 +14,7 @@ from Core.CustomLogger import CustomLogger
 class BaseClass(CustomLogger):
     driver: WebDriver = None
 
-    @pytest.fixture(scope="session")
+    @pytest.fixture(scope="class")
     def open_browser(self):
         driver_type = self.BROWSER_TYPE.lower()
         driver_extension = None

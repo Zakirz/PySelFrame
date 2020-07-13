@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import logging
 
 from Core.Configs import RunConfig
@@ -6,7 +5,7 @@ import textwrap
 import sys
 
 
-class Logger(RunConfig):
+class CustomLogger(RunConfig):
     @property
     def logger(self):
         name = self.__class__.__name__
