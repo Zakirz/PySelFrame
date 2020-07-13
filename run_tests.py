@@ -7,6 +7,7 @@ from Core.App import App
 
 class RunUITests(App):
     def __init__(self):
+        self.init_logger()
         try:
             pytest.main([
                 f"--rootdir={self.BASE_DIR}/pytest_configs", "-s", "-v", f"{os.getcwd()}\\UI_Tests",
