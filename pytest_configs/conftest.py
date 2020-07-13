@@ -1,5 +1,6 @@
-import pytest
 import os
+import pytest
+
 from Core.Configs import RunConfig
 
 
