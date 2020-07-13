@@ -10,13 +10,13 @@ class RunUITests(App):
     def __init__(self):
         try:
             pytest.main([
-                f"--rootdir={self.BASE_DIR}/pytest_configs", "-s", f"{os.getcwd()}\\UI_Tests",
+                f"--rootdir={self.BASE_DIR}/pytest_configs", "-s", "-v", f"{os.getcwd()}\\UI_Tests",
                 "--html=" + self.HTML_REPORT_FILE,
                 "--junit-xml=" + self.XML_REPORT_FILE,
                 "--maxfail", self.MAX_FAIL,
             ])
         finally:
-            self.stop_execution()
+            self.info_log("Success")
 
 
 class RunAPITests(App):

@@ -7,23 +7,15 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 import pytest
 
-from Core.Logger import Logger
+from Core.CustomLogger import CustomLogger
 
 
 @pytest.mark.usefixtures("open_browser")
-class BaseClass(Logger):
+class BaseClass(CustomLogger):
     driver: WebDriver = None
 
-    def start_execution(self):
-        self.init_logger()
-        # self.open_browser()
-
-    def stop_execution(self):
-        if self.driver:
-            self.driver.quit()
-
-    @pytest.fixture(scope="class")
-    def open_browser(self, request):
+    @pytest.fixture(scope="session")
+    def open_browser(self):
         driver_type = self.BROWSER_TYPE.lower()
         driver_extension = None
         platform_name = platform.system()
@@ -31,7 +23,6 @@ class BaseClass(Logger):
             driver_extension = ".exe"
         else:
             driver_extension = ""
-
         try:
             driver = OrderedDict({
                 "chrome": {"name": "chromedriver" + driver_extension, "interface": webdriver.Chrome},
