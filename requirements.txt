@@ -3,6 +3,6 @@ flake8==3.7.9
 pytest==5.4.3
 pytest-html==2.1.1
 pytest-metadata==1.9.0
-requests==2.23.0
+requests==2.31.0
 selenium==3.141.0
 pytest-azurepipelines==0.8.0
